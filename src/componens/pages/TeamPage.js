@@ -2,8 +2,8 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
-import Player from './Player';
-import Image from './styled/Image';
+import Player from '../shared/Player';
+import Image from '../shared/Image';
 
 // ---- styles ------
 const Tbody = styled.tbody`

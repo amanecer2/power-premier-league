@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import TeamRow from "./TeamRow";
+import TeamRow from "../shared/TeamRow";
 
 const Header = styled.h1`
     text-align: center;

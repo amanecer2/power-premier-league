@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 import styled from 'styled-components';
-import Image from './styled/Image';
+import Image from './Image';
 
 const Row = styled.div`
     display: flex;

@@ -7,8 +7,8 @@ import {CompetitionsModel} from "./models/competitionsModel";
 
 import './App.css';
 
-import TeamPage from './componens/TeamPage'
-import League from './componens/League';
+import TeamPage from './componens/pages/TeamPage'
+import League from './componens/pages/League';
 import {footbalApiHelper, PRIMER_LEAGUE_ID} from "./lib/football.util";
 import {TeamModel} from "./models/Team.model";
 
