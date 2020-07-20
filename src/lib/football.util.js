@@ -5,6 +5,12 @@ const KEY = 'e954209397e3416ba6c386b6c48a115d';
 //// https://www.football-data.org/documentation/quickstart
 
 export const PRIMER_LEAGUE_ID = 2021;
+const ENUM = {
+    LEAGUES: 'leagues',
+    TEAMS: 'teams',
+    BASE_URL: 'http://api.football-data.org/v2'
+};
+
 /************************************************************
  *                                                          |
  * Foot ball api helper. reveal pattern with response cache |
@@ -14,6 +20,8 @@ export const PRIMER_LEAGUE_ID = 2021;
 
 /**
  * Add token to football api ajax calls
+ * We can use fetch-intercept for butter http middleware
+ * But for this usage it's enough;
  * @param uri
  * @returns {Promise<any>}
  */
@@ -33,8 +41,8 @@ const footbalApiFetch = async (uri) => {
  */
 export const footbalApiHelper = (() => {
     const cache = {
-        leagues: {},
-        teams: {}
+        [ENUM.LEAGUES]: {},
+        [ENUM.TEAMS]: {}
     };
 
 
@@ -51,10 +59,9 @@ export const footbalApiHelper = (() => {
      * @returns {Promise<CompetitionsModel>}
      */
     const getTeams = async (leagueID = PRIMER_LEAGUE_ID) => {
-        const data = await footbalApiFetch(`http://api.football-data.org/v2/competitions/${leagueID}/teams`)
+        const data = await footbalApiFetch(`${ENUM.BASE_URL}/competitions/${leagueID}/teams`);
         const competitionsModel = new CompetitionsModel(data);
-
-        cache.leagues[leagueID] = competitionsModel;
+        cache[ENUM.LEAGUES][leagueID] = competitionsModel;
         return competitionsModel;
     };
 
@@ -64,15 +71,15 @@ export const footbalApiHelper = (() => {
      * @returns {Promise<TeamModel>}
      */
     const getTeamData = async (teamID = 57) => {
-        const data = await footbalApiFetch(`http://api.football-data.org/v2/teams/${teamID}`);
+        const data = await footbalApiFetch(`${ENUM.BASE_URL}/teams/${teamID}`);
 
         const teamModel = new TeamModel(data);
-        cache.teams[teamID] = teamModel;
+        cache[ENUM.TEAMS][teamID] = teamModel;
         return teamModel;
     };
 
     return {
-        getTeams: (leaguesID = PRIMER_LEAGUE_ID) => returnIfCached('leagues', leaguesID) || getTeams(leaguesID),
-        getTeamData: (teamID = 57) => returnIfCached('teams', teamID) || getTeamData(teamID)
+        getTeams: (leaguesID = PRIMER_LEAGUE_ID) => returnIfCached(ENUM.LEAGUES, leaguesID) || getTeams(leaguesID),
+        getTeamData: (teamID = 57) => returnIfCached(ENUM.TEAMS, teamID) || getTeamData(teamID)
     }
 })();
