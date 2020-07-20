@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 import styled from 'styled-components';
+import Image from './styled/Image';
 
 const Row = styled.div`
     display: flex;
@@ -22,10 +23,10 @@ const Row = styled.div`
         padding: 0 5px;
     }
 `;
-const Image = styled.img`
+/*const Image = styled.img`
     width: 30px;
     height: 30px
-`;
+`;*/
 /**
  *
  * @param {Team} team

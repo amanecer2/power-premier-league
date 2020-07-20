@@ -1,8 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
 import Player from './Player';
+import Image from './styled/Image';
 
 // ---- styles ------
 const Tbody = styled.tbody`
@@ -49,6 +50,24 @@ const Header = styled.div`
     }
 `;
 
+const SubHeader = styled.div`
+   a:link {
+    text-decoration: none;
+    }
+
+    a:visited {
+      text-decoration: none;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+    
+    a:active {
+      text-decoration: underline;
+    }
+`
+
 /**
  *
  * @param {TeamModel} team
@@ -60,12 +79,17 @@ function TeamPage({team}) {
         <Thead>
         <tr>
             <th># </th>
-            <th>player</th>
-            <th>position</th>
-            <th>shirtNumber</th>
+            <th>Player</th>
+            <th>Position</th>
+            <th>Shirt number</th>
         </tr>
         </Thead>
     );
+
+    const navigateToTeamWebsite = ()=> {
+        const windowFeatures = "menubar=yes,location=yes,resizable=yes,scrollbars=yes,status=yes";
+        window.open(team.website, team.name, windowFeatures)
+    };
 
     return (
         <div>
@@ -75,8 +99,17 @@ function TeamPage({team}) {
                         <GoBackButton>go back</GoBackButton>
                     </Link>
 
-                    <div className={'team-name'}>{team.name}</div>
+                    <div className={'team-name'}>
+                        <div><Image src={team.image}/></div>
+                        {team.name}
+                    </div>
                 </Header>
+
+            <SubHeader>
+                <div >{team.address}</div>
+                <div onClick={() => navigateToTeamWebsite()}>website: <a>{team.website}</a></div>
+                <div >Founded at: {team.founded}</div>
+            </SubHeader>
 
             <table>
                 {headers}
