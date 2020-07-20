@@ -40,6 +40,7 @@ export default function ({team, onTeamClickHandler}) {
                 </div>
                 <div>{team.name}</div>
                 <div>{team.founded}</div>
+                <div>{team.address}</div>
             </Row>
         </Link>
     )
